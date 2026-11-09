@@ -1,0 +1,1896 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123c35">
+<meta name="description" content="Garments Pro Notebook">
+<title>Garments Pro Notebook</title>
+
+<style>
+
+/* ===== BASIC DESIGN ===== */
+
+:root {
+    --primary: #126b55;
+    --primary-dark: #084c3d;
+    --secondary: #e8f5ef;
+    --background: #f4f7f6;
+    --surface: #ffffff;
+    --text: #202b28;
+    --muted: #718078;
+    --border: #dce6e1;
+    --shadow: 0 5px 20px rgba(0,0,0,.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, "Noto Sans Bengali", sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+
+.main-header {
+    background: linear-gradient(120deg,#084c3d,#16866a);
+    color: white;
+    padding: 18px 5%;
+    box-shadow: var(--shadow);
+}
+
+.header-content {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 36px;
+}
+
+.brand h1 {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.brand p {
+    font-size: 12px;
+    opacity: .85;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.header-actions button {
+    padding: 9px 13px;
+    border-radius: 8px;
+    background: rgba(255,255,255,.16);
+    color: white;
+    border: 1px solid rgba(255,255,255,.3);
+}
+
+.header-actions button:hover {
+    background: white;
+    color: var(--primary-dark);
+}
+
+/* ===== SEARCH ===== */
+
+.search-area {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 25px;
+    text-align: center;
+}
+
+.search-area h2 {
+    font-size: 25px;
+    color: var(--primary-dark);
+}
+
+.search-area p {
+    color: var(--muted);
+    margin: 5px 0 18px;
+}
+
+#search {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 16px;
+    box-shadow: var(--shadow);
+}
+
+#search:focus {
+    border-color: var(--primary);
+}
+
+.language-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.language-buttons button {
+    padding: 8px 22px;
+    border-radius: 20px;
+    background: var(--surface);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.language-buttons button.active,
+.language-buttons button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+.main-content {
+    max-width: 1250px;
+    margin: 20px auto 50px;
+    padding: 0 18px;
+    display: grid;
+    grid-template-columns: 260px minmax(0,1fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.sidebar,
+.question-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.sidebar h3 {
+    margin-bottom: 15px;
+    color: var(--primary-dark);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.question-header h2 {
+    font-size: 21px;
+    color: var(--primary-dark);
+}
+
+#questionCount {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:800px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:600px) {
+    .main-header {
+        padding: 15px;
+    }
+
+    .brand h1 {
+        font-size: 19px;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-actions button {
+        flex: 1;
+        font-size: 12px;
+    }
+
+    .search-area {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .main-content {
+        padding: 0 12px;
+        gap: 14px;
+    }
+
+    .sidebar,
+    .question-area {
+        padding: 14px;
+    }
+}
+
+/* ===== DARK MODE ===== */
+
+body.dark-mode {
+    --background: #111a17;
+    --surface: #1b2823;
+    --text: #e7f0eb;
+    --muted: #a3b2aa;
+    --border: #34453d;
+    --secondary: #233e33;
+    --primary: #39a985;
+    --primary-dark: #73d6b3;
+    --shadow: 0 5px 20px rgba(0,0,0,.22);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- HEADER -->
+
+    <header class="main-header">
+        <div class="header-content">
+
+            <div class="brand">
+                <div class="brand-icon">📘</div>
+                <div>
+                    <h1>Garments Pro Notebook</h1>
+                    <p>Garments Learning & Knowledge Platform</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button id="themeBtn" onclick="toggleTheme()">🌙</button>
+                <button onclick="window.print()">🖨️ Print</button>
+                <button onclick="openAdmin()">⚙️ Admin</button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- SEARCH AREA -->
+
+    <section class="search-area">
+
+        <h2>আপনার প্রশ্ন খুঁজুন</h2>
+        <p>Search your garments questions and answers</p>
+
+        <input
+            type="search"
+            id="search"
+            placeholder="প্রশ্ন লিখে সার্চ করুন..."
+            autocomplete="off"
+        >
+
+        <div class="language-buttons">
+
+            <button onclick="setLanguage('bn')" id="bnBtn">
+                বাংলা
+            </button>
+
+            <button onclick="setLanguage('en')" id="enBtn">
+                English
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <aside class="sidebar">
+            <h3>বিভাগসমূহ</h3>
+            <div id="sections"></div>
+        </aside>
+
+        <section class="question-area">
+
+            <div class="question-header">
+                <h2 id="sectionHeading">সব প্রশ্ন</h2>
+                <span id="questionCount"></span>
+            </div>
+
+            <div id="questionList">
+                <p class="loading-message">
+                    প্রশ্ন লোড হচ্ছে...
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ADMIN PANEL -->
+
+<div id="adminModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>⚙️ Admin Panel</h2>
+            <button class="close-modal" onclick="closeAdmin()">✕</button>
+        </div>
+
+        <!-- LOGIN -->
+
+        <div id="adminLogin" class="admin-login">
+
+            <h3>Admin Login</h3>
+
+            <form id="loginForm">
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter Admin Password"
+                    required
+                >
+
+                <button type="submit" class="primary-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div id="loginMessage"></div>
+
+        </div>
+
+        <!-- ADMIN DASHBOARD -->
+
+        <div id="adminDashboard" style="display:none;">
+
+            <div class="admin-tabs">
+
+                <button class="active" onclick="showAdminTab('manage',this)">
+                    Manage Questions
+                </button>
+
+                <button onclick="showAdminTab('bulk',this)">
+                    Bulk Add
+                </button>
+
+                <button onclick="showAdminTab('sections',this)">
+                    Sections
+                </button>
+
+                <button onclick="showAdminTab('github',this)">
+                    GitHub Update
+                </button>
+
+                <button onclick="showAdminTab('password',this)">
+                    Change Password
+                </button>
+
+            </div>
+
+            <!-- MANAGE QUESTIONS -->
+
+            <div id="tab-manage" class="admin-tab-content active">
+
+                <h3 id="questionFormHeading">Add New Question</h3>
+
+                <input type="hidden" id="editQuestionId">
+
+                <div class="form-group">
+                    <label>Select Section</label>
+                    <select id="questionSection"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>বাংলা প্রশ্ন</label>
+                    <textarea id="questionBn" placeholder="বাংলা প্রশ্ন লিখুন"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>English Question</label>
+                    <textarea id="questionEn" placeholder="Write English question"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>বাংলা উত্তর</label>
+                    <textarea id="answerBn" placeholder="বাংলা উত্তর লিখুন"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>English Answer</label>
+                    <textarea id="answerEn" placeholder="Write English answer"></textarea>
+                </div>
+
+                <button class="primary-btn" onclick="saveQuestion()">
+                    Save Question
+                </button>
+
+                <button class="secondary-btn" onclick="resetQuestionForm()">
+                    Clear
+                </button>
+
+                <hr style="margin:20px 0;border-color:var(--border);">
+
+                <h3>Question List</h3>
+                <div id="adminQuestionList"></div>
+
+            </div>
+
+            <!-- BULK ADD -->
+
+            <div id="tab-bulk" class="admin-tab-content">
+
+                <h3>Bulk Add Questions</h3>
+
+                <div class="bulk-help">
+                    প্রতিটি প্রশ্নের জন্য চারটি তথ্য দিতে হবে:
+                    বাংলা প্রশ্ন | English Question | বাংলা উত্তর | English Answer
+
+                    <br><br>
+
+                    প্রতিটি প্রশ্ন আলাদা লাইনে লিখুন।
+                </div>
+
+                <div class="form-group">
+                    <label>Select Section</label>
+                    <select id="bulkSection"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Questions Data</label>
+                    <textarea
+                        id="bulkQuestions"
+                        rows="12"
+                        placeholder="বাংলা প্রশ্ন | English Question | বাংলা উত্তর | English Answer"
+                    ></textarea>
+                </div>
+
+                <button class="primary-btn" onclick="bulkAddQuestions()">
+                    Add All Questions
+                </button>
+
+                <div id="bulkMessage"></div>
+
+            </div>
+
+            <!-- SECTION MANAGEMENT -->
+
+            <div id="tab-sections" class="admin-tab-content">
+
+                <h3>Section Management</h3>
+
+                <div class="form-group">
+                    <label>New Section Name</label>
+                    <input
+                        type="text"
+                        id="newSection"
+                        placeholder="Enter section name"
+                    >
+                </div>
+
+                <button class="primary-btn" onclick="addSection()">
+                    Add Section
+                </button>
+
+                <hr style="margin:20px 0;border-color:var(--border);">
+
+                <div id="sectionManagement"></div>
+
+            </div>
+
+            <!-- GITHUB UPDATE -->
+
+            <div id="tab-github" class="admin-tab-content">
+
+                <h3>GitHub Database Update</h3>
+
+                <div class="github-help">
+                    GitHub Token দিয়ে question.json ফাইলটি সরাসরি
+                    GitHub Repository-তে আপডেট করতে পারবেন।
+                </div>
+
+                <div class="form-group">
+                    <label>GitHub Personal Access Token</label>
+
+                    <input
+                        type="password"
+                        id="githubToken"
+                        placeholder="ghp_xxxxxxxxxxxxxxxxx"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <button class="primary-btn" onclick="saveToken()">
+                    Save Token
+                </button>
+
+                <button class="secondary-btn" onclick="clearToken()">
+                    Clear Token
+                </button>
+
+                <hr style="margin:20px 0;border-color:var(--border);">
+
+                <button class="primary-btn" onclick="saveToGithub()">
+                    Update GitHub Database
+                </button>
+
+                <div id="githubMessage"></div>
+
+            </div>
+
+            <!-- CHANGE PASSWORD -->
+
+            <div id="tab-password" class="admin-tab-content">
+
+                <h3>Change Admin Password</h3>
+
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input
+                        type="password"
+                        id="currentAdminPassword"
+                        placeholder="Current password"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input
+                        type="password"
+                        id="newAdminPassword"
+                        placeholder="New password"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input
+                        type="password"
+                        id="confirmAdminPassword"
+                        placeholder="Confirm new password"
+                    >
+                </div>
+
+                <button class="primary-btn" onclick="changeAdminPassword()">
+                    Change Password
+                </button>
+
+                <div id="passwordMessage"></div>
+
+            </div>
+
+            <hr style="margin:20px 0;border-color:var(--border);">
+
+            <button class="danger-btn" onclick="logoutAdmin()">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =====================================
+   GARMENTS PRO NOTEBOOK
+   APP + QUESTIONS SYSTEM
+===================================== */
+
+window.appData = {};
+window.currentLanguage = "bn";
+window.currentTheme = "light";
+window.currentSection = "all";
+
+/* ===== LOAD QUESTION DATA ===== */
+
+async function loadQuestionData() {
+    try {
+        const response = await fetch("./question.json?v=" + Date.now());
+
+        if (!response.ok) {
+            throw new Error("question.json load failed");
+        }
+
+        const data = await response.json();
+
+        if (!data || typeof data !== "object" || Array.isArray(data)) {
+            throw new Error("Invalid question data");
+        }
+
+        window.appData = data;
+
+        renderSections();
+        renderQuestions();
+
+        document.dispatchEvent(new Event("questionDataLoaded"));
+
+    } catch (error) {
+        console.error(error);
+
+        document.getElementById("questionList").innerHTML =
+            '<p class="empty-message">question.json ফাইল লোড করা যায়নি। ফাইলের নাম ও অবস্থান পরীক্ষা করুন।</p>';
+    }
+}
+
+/* ===== LANGUAGE ===== */
+
+function setLanguage(language) {
+    window.currentLanguage = language;
+
+    document.getElementById("bnBtn").classList.toggle("active", language === "bn");
+    document.getElementById("enBtn").classList.toggle("active", language === "en");
+
+    renderSections();
+    renderQuestions();
+}
+
+/* ===== DARK MODE ===== */
+
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+
+    const dark = document.body.classList.contains("dark-mode");
+
+    window.currentTheme = dark ? "dark" : "light";
+
+    localStorage.setItem("gpn-theme", window.currentTheme);
+
+    document.getElementById("themeBtn").textContent =
+        dark ? "☀️" : "🌙";
+}
+
+function applySavedTheme() {
+    const theme = localStorage.getItem("gpn-theme") || "light";
+
+    if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+        window.currentTheme = "dark";
+        document.getElementById("themeBtn").textContent = "☀️";
+    }
+}
+
+/* ===== UTILITY ===== */
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, function(char) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        }[char];
+    });
+}
+
+function generateQuestionId(section, index) {
+    return section + "__" + index;
+}
+
+/* ===== HIDDEN SECTION ===== */
+
+window.GPN_HIDDEN_SECTIONS_KEY = "gpn-hidden-sections";
+
+function getHiddenSections() {
+    try {
+        return JSON.parse(
+            localStorage.getItem(window.GPN_HIDDEN_SECTIONS_KEY) || "[]"
+        );
+    } catch {
+        return [];
+    }
+}
+
+function getVisibleSections() {
+    const hidden = getHiddenSections();
+
+    return Object.keys(window.appData).filter(
+        section => !hidden.includes(section)
+    );
+}
+
+/* ===== GET QUESTIONS ===== */
+
+function getAllQuestions() {
+    const result = [];
+
+    Object.keys(window.appData).forEach(section => {
+        const questions = window.appData[section];
+
+        if (!Array.isArray(questions)) return;
+
+        questions.forEach((item, index) => {
+            if (!Array.isArray(item) || item.length < 4) return;
+
+            result.push({
+                id: generateQuestionId(section, index),
+                section: section,
+                index: index,
+                bnQuestion: item[0] || "",
+                enQuestion: item[1] || "",
+                bnAnswer: item[2] || "",
+                enAnswer: item[3] || ""
+            });
+        });
+    });
+
+    return result;
+}
+
+/* ===== RENDER SECTIONS ===== */
+
+function renderSections() {
+    const container = document.getElementById("sections");
+
+    if (!container) return;
+
+    const sections = getVisibleSections();
+
+    let html = `
+        <button class="section-button ${window.currentSection === "all" ? "active" : ""}"
+            onclick="selectSection('all')">
+            ${window.currentLanguage === "bn" ? "সব প্রশ্ন" : "All Questions"}
+        </button>
+    `;
+
+    sections.forEach(section => {
+        const active = window.currentSection === section ? "active" : "";
+
+        html += `
+            <button class="section-button ${active}"
+                onclick="selectSection('${escapeHTML(section).replace(/'/g, "\\'")}')">
+                ${escapeHTML(section)}
+            </button>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+/* ===== SELECT SECTION ===== */
+
+function selectSection(section) {
+    window.currentSection = section;
+
+    renderSections();
+    renderQuestions();
+}
+
+/* ===== RENDER QUESTIONS ===== */
+
+function renderQuestions() {
+    const container = document.getElementById("questionList");
+    const heading = document.getElementById("sectionHeading");
+    const count = document.getElementById("questionCount");
+
+    if (!container) return;
+
+    const searchValue = (
+        document.getElementById("search")?.value || ""
+    ).trim().toLowerCase();
+
+    let questions = getAllQuestions();
+
+    if (window.currentSection !== "all") {
+        questions = questions.filter(
+            q => q.section === window.currentSection
+        );
+    }
+
+    questions = questions.filter(q => {
+        const text = [
+            q.bnQuestion,
+            q.enQuestion,
+            q.bnAnswer,
+            q.enAnswer,
+            q.section
+        ].join(" ").toLowerCase();
+
+        return text.includes(searchValue);
+    });
+
+    if (heading) {
+        heading.textContent =
+            window.currentSection === "all"
+                ? (window.currentLanguage === "bn" ? "সব প্রশ্ন" : "All Questions")
+                : window.currentSection;
+    }
+
+    if (count) {
+        count.textContent =
+            questions.length +
+            (window.currentLanguage === "bn" ? " টি প্রশ্ন" : " Questions");
+    }
+
+    if (!questions.length) {
+        container.innerHTML = `
+            <p class="empty-message">
+                ${window.currentLanguage === "bn"
+                    ? "কোনো প্রশ্ন পাওয়া যায়নি।"
+                    : "No questions found."}
+            </p>
+        `;
+        return;
+    }
+
+    let html = "";
+
+    questions.forEach((q, index) => {
+        const questionText =
+            window.currentLanguage === "bn"
+                ? q.bnQuestion
+                : q.enQuestion;
+
+        const answerText =
+            window.currentLanguage === "bn"
+                ? q.bnAnswer
+                : q.enAnswer;
+
+        const answerHeading =
+            window.currentLanguage === "bn"
+                ? "উত্তর:"
+                : "Answer:";
+
+        html += `
+            <article class="question-card">
+
+                <span class="question-number">
+                    ${index + 1}
+                </span>
+
+                <div class="question-text">
+                    ${escapeHTML(questionText)}
+                </div>
+
+                <div class="question-section-name">
+                    ${escapeHTML(q.section)}
+                </div>
+
+                <div class="question-actions">
+
+                    <button class="language-toggle-btn"
+                        onclick="toggleQuestionLanguage('${escapeHTML(q.id)}')">
+                        ${window.currentLanguage === "bn"
+                            ? "English Question"
+                            : "বাংলা প্রশ্ন"}
+                    </button>
+
+                    <button class="answer-toggle-btn"
+                        onclick="toggleAnswer('${escapeHTML(q.id)}')">
+                        ${window.currentLanguage === "bn"
+                            ? "উত্তর দেখুন"
+                            : "Show Answer"}
+                    </button>
+
+                </div>
+
+                <div class="answer-box"
+                    id="answer-${escapeHTML(q.id)}"
+                    style="display:none;">
+
+                    <div class="answer-heading">
+                        ${answerHeading}
+                    </div>
+
+                    <div class="answer-text">
+                        ${escapeHTML(answerText)}
+                    </div>
+
+                </div>
+
+            </article>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+/* ===== QUESTION LANGUAGE TOGGLE ===== */
+
+function toggleQuestionLanguage(id) {
+    const questions = getAllQuestions();
+    const q = questions.find(item => item.id === id);
+
+    if (!q) return;
+
+    const card = document.getElementById("answer-" + id)?.closest(".question-card");
+
+    if (!card) return;
+
+    const question = card.querySelector(".question-text");
+    const answerBox = card.querySelector(".answer-box");
+    const answerText = card.querySelector(".answer-text");
+    const answerHeading = card.querySelector(".answer-heading");
+    const languageButton = card.querySelector(".language-toggle-btn");
+    const answerButton = card.querySelector(".answer-toggle-btn");
+
+    const isEnglish = languageButton.dataset.language !== "en";
+
+    languageButton.dataset.language = isEnglish ? "en" : "bn";
+
+    question.textContent = isEnglish ? q.enQuestion : q.bnQuestion;
+    answerText.textContent = isEnglish ? q.enAnswer : q.bnAnswer;
+
+    answerHeading.textContent = isEnglish ? "Answer:" : "উত্তর:";
+
+    languageButton.textContent = isEnglish ? "বাংলা প্রশ্ন" : "English Question";
+
+    answerButton.textContent = isEnglish
+        ? "Show Answer"
+        : "উত্তর দেখুন";
+}
+
+/* ===== SHOW / HIDE ANSWER ===== */
+
+function toggleAnswer(id) {
+    const box = document.getElementById("answer-" + id);
+
+    if (!box) return;
+
+    const button = box.parentElement.querySelector(".answer-toggle-btn");
+
+    const visible = box.style.display !== "none";
+
+    box.style.display = visible ? "none" : "block";
+
+    if (button) {
+        button.textContent = visible
+            ? (window.currentLanguage === "bn" ? "উত্তর দেখুন" : "Show Answer")
+            : (window.currentLanguage === "bn" ? "উত্তর লুকান" : "Hide Answer");
+    }
+}
+
+/* ===== SEARCH ===== */
+
+document.getElementById("search").addEventListener("input", function() {
+    renderQuestions();
+});
+
+/* ===== START APP ===== */
+
+document.addEventListener("DOMContentLoaded", function() {
+    applySavedTheme();
+    loadQuestionData();
+});
+
+</script>
+
+<style>
+
+/* ===== ADMIN PANEL DESIGN ===== */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,.7);
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 900px;
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 15px;
+    padding: 22px;
+    margin: 25px auto;
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.modal-header h2 {
+    color: var(--primary);
+}
+
+.close-modal {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 18px;
+}
+
+.admin-login {
+    max-width: 400px;
+    margin: 25px auto;
+}
+
+.admin-login h3 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.admin-login input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--background);
+    color: var(--text);
+}
+
+.admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.admin-tabs button {
+    padding: 9px 13px;
+    border-radius: 8px;
+    background: var(--background);
+    color: var(--text);
+}
+
+.admin-tabs button.active,
+.admin-tabs button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.admin-tab-content {
+    display: none;
+}
+
+.admin-tab-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 13px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--background);
+    color: var(--text);
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin: 4px 2px;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.secondary-btn {
+    background: #e5e7eb;
+    color: #333;
+}
+
+.danger-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.danger-btn:hover {
+    opacity: .85;
+}
+
+.admin-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    margin-bottom: 9px;
+}
+
+.admin-list-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.admin-list-actions button {
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.bulk-help,
+.github-help {
+    background: var(--secondary);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 7px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.message.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.message.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.hidden-section {
+    opacity: .55;
+}
+
+@media(max-width:600px) {
+    .modal-content {
+        padding: 15px;
+        margin: 10px auto;
+    }
+}
+
+/* ===== PRINT DESIGN ===== */
+
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .main-header,
+    .search-area,
+    .sidebar,
+    .header-actions,
+    .question-actions,
+    .modal {
+        display: none !important;
+    }
+
+    .main-content {
+        display: block;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .question-area,
+    .question-card {
+        border: none;
+        box-shadow: none;
+    }
+
+    .answer-box {
+        display: block !important;
+        background: white !important;
+        color: black !important;
+        border: 1px solid #999;
+    }
+
+    .question-card {
+        page-break-inside: avoid;
+    }
+}
+
+</style>
+
+<script>
+
+/* =====================================
+   ADMIN SYSTEM
+===================================== */
+
+const ADMIN_PASSWORD_KEY = "gpn-admin-password";
+const DEFAULT_ADMIN_PASSWORD = "admin123";
+
+window.adminLoggedIn = false;
+
+function getAdminPassword() {
+    return localStorage.getItem(ADMIN_PASSWORD_KEY) ||
+        DEFAULT_ADMIN_PASSWORD;
+}
+
+/* ===== OPEN / CLOSE ADMIN ===== */
+
+function openAdmin() {
+    document.getElementById("adminModal").classList.add("show");
+
+    if (window.adminLoggedIn) {
+        showAdminDashboard();
+    } else {
+        document.getElementById("adminLogin").style.display = "block";
+        document.getElementById("adminDashboard").style.display = "none";
+    }
+}
+
+function closeAdmin() {
+    document.getElementById("adminModal").classList.remove("show");
+}
+
+/* ===== LOGIN ===== */
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const password = document.getElementById("adminPassword").value;
+    const message = document.getElementById("loginMessage");
+
+    if (password === getAdminPassword()) {
+        window.adminLoggedIn = true;
+        document.getElementById("adminPassword").value = "";
+        message.innerHTML = "";
+        showAdminDashboard();
+    } else {
+        message.innerHTML =
+            '<div class="message error">ভুল পাসওয়ার্ড। আবার চেষ্টা করুন।</div>';
+    }
+});
+
+function showAdminDashboard() {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminDashboard").style.display = "block";
+
+    populateSectionSelects();
+    renderAdminQuestions();
+    renderSectionManagement();
+}
+
+/* ===== LOGOUT ===== */
+
+function logoutAdmin() {
+    window.adminLoggedIn = false;
+
+    document.getElementById("adminDashboard").style.display = "none";
+    document.getElementById("adminLogin").style.display = "block";
+
+    document.getElementById("loginMessage").innerHTML =
+        '<div class="message success">Logout সফল হয়েছে।</div>';
+}
+
+/* ===== ADMIN TAB ===== */
+
+function showAdminTab(tab, button) {
+    document.querySelectorAll(".admin-tab-content").forEach(el => {
+        el.classList.remove("active");
+    });
+
+    document.querySelectorAll(".admin-tabs button").forEach(el => {
+        el.classList.remove("active");
+    });
+
+    const target = document.getElementById("tab-" + tab);
+
+    if (target) target.classList.add("active");
+    if (button) button.classList.add("active");
+}
+
+/* ===== SECTION SELECTS ===== */
+
+function populateSectionSelects() {
+    const sections = Object.keys(window.appData);
+
+    ["questionSection", "bulkSection"].forEach(id => {
+        const select = document.getElementById(id);
+
+        if (!select) return;
+
+        const oldValue = select.value;
+
+        select.innerHTML = sections.map(section =>
+            `<option value="${escapeHTML(section)}">${escapeHTML(section)}</option>`
+        ).join("");
+
+        if (sections.includes(oldValue)) {
+            select.value = oldValue;
+        }
+    });
+}
+
+/* ===== SAVE QUESTION ===== */
+
+function saveQuestion() {
+    if (!window.adminLoggedIn) return;
+
+    const section = document.getElementById("questionSection").value;
+    const bn = document.getElementById("questionBn").value.trim();
+    const en = document.getElementById("questionEn").value.trim();
+    const bnAnswer = document.getElementById("answerBn").value.trim();
+    const enAnswer = document.getElementById("answerEn").value.trim();
+
+    const editId = document.getElementById("editQuestionId").value;
+
+    if (!section || !bn || !en || !bnAnswer || !enAnswer) {
+        alert("সবগুলো ঘর পূরণ করুন।");
+        return;
+    }
+
+    if (editId) {
+        const [oldSection, oldIndex] = editId.split("__");
+        const index = Number(oldIndex);
+
+        if (!window.appData[oldSection] ||
+            !window.appData[oldSection][index]) {
+            alert("প্রশ্নটি পাওয়া যায়নি।");
+            return;
+        }
+
+        if (oldSection === section) {
+            window.appData[section][index] = [bn, en, bnAnswer, enAnswer];
+        } else {
+            window.appData[oldSection].splice(index, 1);
+            window.appData[section].push([bn, en, bnAnswer, enAnswer]);
+        }
+
+        alert("প্রশ্ন আপডেট হয়েছে।");
+
+    } else {
+        window.appData[section].push([bn, en, bnAnswer, enAnswer]);
+        alert("নতুন প্রশ্ন যোগ হয়েছে।");
+    }
+
+    resetQuestionForm();
+    renderQuestions();
+    renderAdminQuestions();
+    populateSectionSelects();
+}
+
+function resetQuestionForm() {
+    document.getElementById("editQuestionId").value = "";
+    document.getElementById("questionBn").value = "";
+    document.getElementById("questionEn").value = "";
+    document.getElementById("answerBn").value = "";
+    document.getElementById("answerEn").value = "";
+
+    document.getElementById("questionFormHeading").textContent =
+        "Add New Question";
+}
+
+/* ===== ADMIN QUESTION LIST ===== */
+
+function renderAdminQuestions() {
+    const container = document.getElementById("adminQuestionList");
+
+    if (!container) return;
+
+    let html = "";
+
+    Object.keys(window.appData).forEach(section => {
+        window.appData[section].forEach((q, index) => {
+            html += `
+                <div class="admin-list-item">
+                    <div>
+                        <strong>${escapeHTML(section)}</strong>
+                        <div>${escapeHTML(q[0])}</div>
+                    </div>
+
+                    <div class="admin-list-actions">
+                        <button class="primary-btn"
+                            onclick="editQuestion('${escapeHTML(section)}',${index})">
+                            Edit
+                        </button>
+
+                        <button class="danger-btn"
+                            onclick="deleteQuestion('${escapeHTML(section)}',${index})">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+    });
+
+    container.innerHTML = html || "<p>কোনো প্রশ্ন নেই।</p>";
+}
+
+/* ===== EDIT QUESTION ===== */
+
+function editQuestion(section, index) {
+    const q = window.appData[section]?.[index];
+
+    if (!q) return;
+
+    document.getElementById("editQuestionId").value =
+        section + "__" + index;
+
+    document.getElementById("questionSection").value = section;
+    document.getElementById("questionBn").value = q[0];
+    document.getElementById("questionEn").value = q[1];
+    document.getElementById("answerBn").value = q[2];
+    document.getElementById("answerEn").value = q[3];
+
+    document.getElementById("questionFormHeading").textContent =
+        "Edit Question";
+
+    showAdminTab("manage",
+        document.querySelector(".admin-tabs button"));
+
+    document.querySelector(".modal-content").scrollTop = 0;
+}
+
+/* ===== DELETE QUESTION ===== */
+
+function deleteQuestion(section, index) {
+    if (!confirm("এই প্রশ্নটি মুছে ফেলতে চান?")) return;
+
+    window.appData[section].splice(index, 1);
+
+    renderQuestions();
+    renderAdminQuestions();
+    resetQuestionForm();
+}
+
+/* ===== BULK ADD ===== */
+
+function bulkAddQuestions() {
+    if (!window.adminLoggedIn) return;
+
+    const section = document.getElementById("bulkSection").value;
+    const input = document.getElementById("bulkQuestions").value.trim();
+    const message = document.getElementById("bulkMessage");
+
+    if (!section || !input) {
+        message.innerHTML =
+            '<div class="message error">Section এবং প্রশ্নের তথ্য দিন।</div>';
+        return;
+    }
+
+    const lines = input.split(/\r?\n/);
+    let added = 0;
+    let skipped = 0;
+
+    lines.forEach(line => {
+        if (!line.trim()) return;
+
+        const parts = line.split("|").map(x => x.trim());
+
+        if (parts.length !== 4 || parts.some(x => !x)) {
+            skipped++;
+            return;
+        }
+
+        window.appData[section].push(parts);
+        added++;
+    });
+
+    renderQuestions();
+    renderAdminQuestions();
+
+    message.innerHTML = `
+        <div class="message success">
+            ${added} টি প্রশ্ন যোগ হয়েছে। ${skipped} টি লাইন বাদ পড়েছে।
+        </div>
+    `;
+
+    document.getElementById("bulkQuestions").value = "";
+}
+
+/* ===== SECTION MANAGEMENT ===== */
+
+function addSection() {
+    const input = document.getElementById("newSection");
+    const name = input.value.trim();
+
+    if (!name) {
+        alert("Section name লিখুন।");
+        return;
+    }
+
+    if (window.appData[name]) {
+        alert("এই Section আগে থেকেই আছে।");
+        return;
+    }
+
+    window.appData[name] = [];
+
+    input.value = "";
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+}
+
+function renameSection(oldName) {
+    const newName = prompt("নতুন Section Name লিখুন:", oldName);
+
+    if (!newName || !newName.trim()) return;
+
+    const name = newName.trim();
+
+    if (window.appData[name]) {
+        alert("এই নামটি আগে থেকেই আছে।");
+        return;
+    }
+
+    const newData = {};
+
+    Object.keys(window.appData).forEach(key => {
+        newData[key === oldName ? name : key] = window.appData[key];
+    });
+
+    window.appData = newData;
+
+    if (window.currentSection === oldName) {
+        window.currentSection = name;
+    }
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+    renderAdminQuestions();
+}
+
+function deleteSection(section) {
+    if (!confirm(section + " Section এবং এর সব প্রশ্ন মুছে ফেলবেন?")) {
+        return;
+    }
+
+    delete window.appData[section];
+
+    if (window.currentSection === section) {
+        window.currentSection = "all";
+    }
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+    renderAdminQuestions();
+}
+
+function toggleSectionVisibility(section) {
+    let hidden = getHiddenSections();
+
+    if (hidden.includes(section)) {
+        hidden = hidden.filter(x => x !== section);
+    } else {
+        hidden.push(section);
+    }
+
+    localStorage.setItem(
+        window.GPN_HIDDEN_SECTIONS_KEY,
+        JSON.stringify(hidden)
+    );
+
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+}
+
+function moveSection(section, direction) {
+    const keys = Object.keys(window.appData);
+    const index = keys.indexOf(section);
+    const newIndex = index + direction;
+
+    if (newIndex < 0 || newIndex >= keys.length) return;
+
+    [keys[index], keys[newIndex]] = [keys[newIndex], keys[index]];
+
+    const reordered = {};
+
+    keys.forEach(key => {
+        reordered[key] = window.appData[key];
+    });
+
+    window.appData = reordered;
+
+    renderSectionManagement();
+    renderSections();
+}
+
+function renderSectionManagement() {
+    const container = document.getElementById("sectionManagement");
+
+    if (!container) return;
+
+    const hidden = getHiddenSections();
+
+    container.innerHTML = Object.keys(window.appData).map((section, index) => `
+        <div class="admin-list-item ${hidden.includes(section) ? "hidden-section" : ""}">
+
+            <strong>${escapeHTML(section)}</strong>
+
+            <div class="admin-list-actions">
+
+                <button class="secondary-btn"
+                    onclick="moveSection('${escapeHTML(section)}',-1)">
+                    ↑
+                </button>
+
+                <button class="secondary-btn"
+                    onclick="moveSection('${escapeHTML(section)}',1)">
+                    ↓
+                </button>
+
+                <button class="secondary-btn"
+                    onclick="toggleSectionVisibility('${escapeHTML(section)}')">
+                    ${hidden.includes(section) ? "Show" : "Hide"}
+                </button>
+
+                <button class="primary-btn"
+                    onclick="renameSection('${escapeHTML(section)}')">
+                    Rename
+                </button>
+
+                <button class="danger-btn"
+                    onclick="deleteSection('${escapeHTML(section)}')">
+                    Delete
+                </button>
+
+            </div>
+        </div>
+    `).join("");
+}
+
+/* =====================================
+   GITHUB DATABASE SYSTEM
+===================================== */
+
+const GITHUB_OWNER = "Shohid98";
+const GITHUB_REPO = "Garments";
+const GITHUB_BRANCH = "main";
+const GITHUB_FILE_PATH = "question.json";
+
+const GITHUB_API_URL =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
+
+const GITHUB_TOKEN_KEY = "gpn-github-token";
+
+function getGithubHeaders(token) {
+    return {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer " + token,
+        "X-GitHub-Api-Version": "2022-11-28"
+    };
+}
+
+function getSavedGithubToken() {
+    return localStorage.getItem(GITHUB_TOKEN_KEY) || "";
+}
+
+function encodeBase64Unicode(text) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = "";
+
+    bytes.forEach(byte => {
+        binary += String.fromCharCode(byte);
+    });
+
+    return btoa(binary);
+}
+
+function showGithubMessage(message, type) {
+    const container = document.getElementById("githubMessage");
+
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="message ${type}">
+            ${escapeHTML(message)}
+        </div>
+    `;
+}
+
+async function saveToken() {
+    const token = document.getElementById("githubToken").value.trim();
+
+    if (!token) {
+        showGithubMessage("GitHub Token দিন।", "error");
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            GITHUB_API_URL + "?ref=" + GITHUB_BRANCH,
+            {
+                headers: getGithubHeaders(token)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Token যাচাই করা যায়নি। Repository permission পরীক্ষা করুন।");
+        }
+
+        localStorage.setItem(GITHUB_TOKEN_KEY, token);
+
+        showGithubMessage("GitHub Token সফলভাবে যাচাই ও সংরক্ষণ করা হয়েছে।", "success");
+
+    } catch (error) {
+        showGithubMessage(error.message, "error");
+    }
+}
+
+function clearToken() {
+    localStorage.removeItem(GITHUB_TOKEN_KEY);
+
+    document.getElementById("githubToken").value = "";
+
+    showGithubMessage("সংরক্ষিত Token মুছে ফেলা হয়েছে।", "success");
+}
+
+async function saveToGithub() {
+    if (!window.adminLoggedIn) {
+        showGithubMessage("আগে Admin Login করুন।", "error");
+        return;
+    }
+
+    const token = getSavedGithubToken();
+
+    if (!token) {
+        showGithubMessage("আগে GitHub Token Save করুন।", "error");
+        return;
+    }
+
+    if (!confirm("বর্তমান প্রশ্নের ডেটা GitHub-এ আপডেট করবেন?")) {
+        return;
+    }
+
+    try {
+        showGithubMessage("GitHub-এর সঙ্গে সংযোগ হচ্ছে...", "success");
+
+        const getResponse = await fetch(
+            GITHUB_API_URL + "?ref=" + GITHUB_BRANCH,
+            {
+                headers: getGithubHeaders(token)
+            }
+        );
+
+        if (!getResponse.ok) {
+            throw new Error("GitHub ফাইল পড়া যায়নি। Token ও Repository পরীক্ষা করুন।");
+        }
+
+        const fileData = await getResponse.json();
+
+        const jsonText = JSON.stringify(window.appData, null, 2);
+
+        const encodedContent = encodeBase64Unicode(jsonText);
+
+        const updateResponse = await fetch(GITHUB_API_URL, {
+            method: "PUT",
+
+            headers: {
+                ...getGithubHeaders(token),
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: "Update Garments Pro Notebook question database",
+                content: encodedContent,
+                sha: fileData.sha,
+                branch: GITHUB_BRANCH
+            })
+        });
+
+        const result = await updateResponse.json();
+
+        if (!updateResponse.ok) {
+            throw new Error(
+                result.message || "GitHub Update ব্যর্থ হয়েছে।"
+            );
+        }
+
+        showGithubMessage(
+            "সফলভাবে GitHub-এর question.json আপডেট হয়েছে।",
+            "success"
+        );
+
+    } catch (error) {
+        showGithubMessage(error.message, "error");
+    }
+}
+
+/* ===== TOKEN FIELD LOAD ===== */
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tokenInput = document.getElementById("githubToken");
+
+    if (tokenInput && getSavedGithubToken()) {
+        tokenInput.placeholder = "Token সংরক্ষিত আছে";
+    }
+});
+
+/* ===== CLOSE MODAL ON OUTSIDE CLICK ===== */
+
+document.getElementById("adminModal").addEventListener("click", function(event) {
+    if (event.target === this) {
+        closeAdmin();
+    }
+});
+
+</script>
+
+</body>
+</html>
+
