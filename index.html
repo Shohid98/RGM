@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123c35">
+<meta name="description" content="Garments Pro Notebook">
+<title>Garments Pro Notebook</title>
+
+<style>
+:root {
+    --primary:#126b55;
+    --primary-dark:#084c3d;
+    --secondary:#e8f5ef;
+    --background:#f4f7f6;
+    --surface:#fff;
+    --text:#202b28;
+    --muted:#718078;
+    --border:#dce6e1;
+    --shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:var(--background);
+    color:var(--text);
+    line-height:1.6;
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:none}
+[hidden]{display:none!important}
+
+.app-container{width:100%;min-height:100vh}
+
+/* HEADER */
+.main-header{
+    background:linear-gradient(120deg,#084c3d,#16866a);
+    color:white;
+    padding:18px 5%;
+    box-shadow:var(--shadow);
+}
+.header-content{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{font-size:36px}
+.brand h1{font-size:23px;font-weight:800}
+.brand p{font-size:12px;opacity:.85}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap}
+.header-actions button{
+    padding:9px 13px;
+    border-radius:8px;
+    background:rgba(255,255,255,.16);
+    color:white;
+    border:1px solid rgba(255,255,255,.3);
+}
+.header-actions button:hover{background:white;color:var(--primary-dark)}
+
+/* SEARCH */
+.search-area{
+    max-width:850px;
+    margin:30px auto;
+    padding:25px;
+    text-align:center;
+}
+.search-area h2{font-size:25px;color:var(--primary-dark)}
+.search-area p{color:var(--muted);margin:5px 0 18px}
+#search{
+    width:100%;
+    padding:15px 18px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    background:var(--surface);
+    color:var(--text);
+    font-size:16px;
+    box-shadow:var(--shadow);
+}
+#search:focus{border-color:var(--primary)}
+.language-buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+.language-buttons button{
+    padding:8px 22px;
+    border-radius:20px;
+    background:var(--surface);
+    color:var(--primary);
+    border:1px solid var(--primary);
+}
+.language-buttons button.active,
+.language-buttons button:hover{
+    background:var(--primary);
+    color:white;
+}
+
+/* MAIN LAYOUT */
+.main-content{
+    max-width:1250px;
+    margin:20px auto 50px;
+    padding:0 18px;
+    display:grid;
+    grid-template-columns:260px minmax(0,1fr);
+    gap:22px;
+    align-items:start;
+}
+.sidebar,.question-area{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+.sidebar h3{margin-bottom:15px;color:var(--primary-dark)}
+.question-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding-bottom:15px;
+    margin-bottom:15px;
+    border-bottom:1px solid var(--border);
+}
+.question-header h2{font-size:21px;color:var(--primary-dark)}
+#questionCount{font-size:13px;color:var(--muted)}
+
+/* SECTION BUTTONS */
+.section-button{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding:10px 12px;
+    margin:5px 0;
+    border-radius:8px;
+    background:var(--background);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+.section-button.active,.section-button:hover{
+    background:var(--primary);
+    color:white;
+    border-color:var(--primary);
+}
+
+/* QUESTION CARD */
+.question-card{
+    background:#fff;
+    color:#202b28;
+    border:1px solid #dce6e1;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+.question-card-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+.question-number{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#126b55;
+    color:white;
+    font-weight:bold;
+}
+.question-section-name{
+    color:#718078;
+    font-size:12px;
+}
+.question-text{
+    font-size:17px;
+    font-weight:700;
+    line-height:1.7;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+    margin:8px 0 15px;
+}
+.question-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+.language-toggle-btn{
+    padding:8px 15px;
+    border:1px solid #126b55;
+    border-radius:7px;
+    background:#fff;
+    color:#126b55;
+    font-weight:700;
+}
+.language-toggle-btn.active{
+    background:#126b55;
+    color:#fff;
+}
+.answer-toggle-btn{
+    padding:8px 15px;
+    border-radius:7px;
+    background:#084c3d;
+    color:#fff;
+    font-weight:700;
+}
+.answer-toggle-btn:hover{background:#126b55}
+.answer-box{
+    display:block;
+    margin-top:15px;
+    padding:14px;
+    border:1px solid #cfe3d8;
+    border-left:4px solid #126b55;
+    border-radius:8px;
+    background:#f1f8f4;
+    color:#202b28;
+}
+.answer-heading{
+    font-weight:800;
+    color:#084c3d;
+    margin-bottom:6px;
+}
+.answer-text{
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+    line-height:1.8;
+}
+.empty-message,.loading-message{
+    padding:20px;
+    text-align:center;
+    color:var(--muted);
+}
+
+/* ADMIN PANEL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:rgba(0,0,0,.7);
+    padding:15px;
+    overflow-y:auto;
+}
+.modal.show{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+.modal-content{
+    width:100%;
+    max-width:900px;
+    background:var(--surface);
+    color:var(--text);
+    border-radius:15px;
+    padding:22px;
+    margin:25px auto;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+.modal-header h2{color:var(--primary)}
+.close-modal{
+    background:#fee2e2;
+    color:#b91c1c;
+    border-radius:8px;
+    padding:7px 12px;
+    font-size:18px;
+}
+.admin-login{max-width:400px;margin:25px auto}
+.admin-login h3{margin-bottom:15px;text-align:center}
+.admin-login input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--background);
+    color:var(--text);
+}
+.admin-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:18px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:12px;
+}
+.admin-tabs button{
+    padding:9px 13px;
+    border-radius:8px;
+    background:var(--background);
+    color:var(--text);
+}
+.admin-tabs button.active,.admin-tabs button:hover{
+    background:var(--primary);
+    color:white;
+}
+.admin-tab-content{display:none}
+.admin-tab-content.active{display:block}
+.form-group{margin-bottom:13px}
+.form-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:5px;
+}
+.form-group input,.form-group textarea,.form-group select{
+    width:100%;
+    padding:11px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--background);
+    color:var(--text);
+}
+.form-group textarea{min-height:90px;resize:vertical}
+.primary-btn,.secondary-btn,.danger-btn{
+    padding:10px 15px;
+    border-radius:8px;
+    margin:4px 2px;
+}
+.primary-btn{background:var(--primary);color:white}
+.secondary-btn{background:#e5e7eb;color:#333}
+.danger-btn{background:#dc2626;color:white}
+.primary-btn:hover,.secondary-btn:hover,.danger-btn:hover{opacity:.85}
+.admin-list-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    margin-bottom:9px;
+}
+.admin-list-actions{display:flex;flex-wrap:wrap;gap:5px}
+.admin-list-actions button{
+    padding:6px 9px;
+    border-radius:6px;
+    font-size:12px;
+}
+.bulk-help,.github-help{
+    background:var(--secondary);
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:12px;
+    font-size:13px;
+}
+.message{
+    padding:10px;
+    border-radius:7px;
+    margin:10px 0;
+    font-size:13px;
+}
+.message.error{background:#fee2e2;color:#991b1b}
+.message.success{background:#dcfce7;color:#166534}
+.hidden-section{opacity:.55}
+
+/* DARK MODE */
+body.dark-mode{
+    --background:#111a17;
+    --surface:#1b2823;
+    --text:#e7f0eb;
+    --muted:#a3b2aa;
+    --border:#34453d;
+    --secondary:#233e33;
+    --primary:#39a985;
+    --primary-dark:#73d6b3;
+    --shadow:0 5px 20px rgba(0,0,0,.22);
+}
+body.dark-mode .question-card{
+    background:#fff;
+    color:#202b28;
+}
+body.dark-mode .language-toggle-btn{
+    background:#fff;
+    color:#126b55;
+}
+body.dark-mode .language-toggle-btn.active{
+    background:#126b55;
+    color:#fff;
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+    .main-content{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+    .main-header{padding:15px}
+    .brand h1{font-size:19px}
+    .header-actions{width:100%}
+    .header-actions button{flex:1;font-size:12px}
+    .search-area{padding:15px;margin:15px auto}
+    .main-content{padding:0 12px;gap:14px}
+    .sidebar,.question-area{padding:14px}
+    .question-card{padding:14px}
+    .question-text{font-size:16px}
+    .modal-content{padding:15px;margin:10px auto}
+}
+
+/* PRINT */
+@media print{
+    body{background:white!important;color:black!important}
+    .main-header,.search-area,.sidebar,.header-actions,
+    .question-actions,.modal{display:none!important}
+    .main-content{display:block;max-width:100%;margin:0;padding:0}
+    .question-area,.question-card{border:none;box-shadow:none}
+    .answer-box{
+        display:block!important;
+        background:white!important;
+        color:black!important;
+        border:1px solid #999;
+    }
+    .question-card{page-break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<div class="app-container">
+
+<header class="main-header">
+    <div class="header-content">
+        <div class="brand">
+            <div class="brand-icon">📘</div>
+            <div>
+                <h1>Garments Pro Notebook</h1>
+                <p>Garments Learning & Knowledge Platform</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button id="themeBtn" onclick="toggleTheme()">🌙</button>
+            <button onclick="window.print()">🖨️ Print</button>
+            <button onclick="openAdmin()">⚙️ Admin</button>
+        </div>
+    </div>
+</header>
+
+<section class="search-area">
+    <h2>আপনার প্রশ্ন খুঁজুন</h2>
+    <p>Search your garments questions and answers</p>
+    <input type="search" id="search"
+        placeholder="প্রশ্ন লিখে সার্চ করুন..."
+        autocomplete="off">
+    <div class="language-buttons">
+        <button onclick="setLanguage('bn')" id="bnBtn">বাংলা</button>
+        <button onclick="setLanguage('en')" id="enBtn">English</button>
+    </div>
+</section>
+
+<main class="main-content">
+    <aside class="sidebar">
+        <h3>বিভাগসমূহ</h3>
+        <div id="sections"></div>
+    </aside>
+
+    <section class="question-area">
+        <div class="question-header">
+            <h2 id="sectionHeading">সব প্রশ্ন</h2>
+            <span id="questionCount"></span>
+        </div>
+        <div id="questionList">
+            <p class="loading-message">প্রশ্ন লোড হচ্ছে...</p>
+        </div>
+    </section>
+</main>
+</div>
+
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>⚙️ Admin Panel</h2>
+            <button class="close-modal" onclick="closeAdmin()">✕</button>
+        </div>
+
+        <div id="adminLogin" class="admin-login">
+            <h3>Admin Login</h3>
+            <form id="loginForm">
+                <input type="password" id="adminPassword"
+                    placeholder="Enter Admin Password" required>
+                <button type="submit" class="primary-btn">Login</button>
+            </form>
+            <div id="loginMessage"></div>
+        </div>
+
+        <div id="adminDashboard" style="display:none;">
+            <div class="admin-tabs">
+                <button class="active" onclick="showAdminTab('manage',this)">Manage Questions</button>
+                <button onclick="showAdminTab('bulk',this)">Bulk Add</button>
+                <button onclick="showAdminTab('sections',this)">Sections</button>
+                <button onclick="showAdminTab('github',this)">GitHub Update</button>
+                <button onclick="showAdminTab('password',this)">Change Password</button>
+            </div>
+
+            <div id="tab-manage" class="admin-tab-content active">
+                <h3 id="questionFormHeading">Add New Question</h3>
+                <input type="hidden" id="editQuestionId">
+
+                <div class="form-group">
+                    <label>Select Section</label>
+                    <select id="questionSection"></select>
+                </div>
+                <div class="form-group">
+                    <label>বাংলা প্রশ্ন</label>
+                    <textarea id="questionBn" placeholder="বাংলা প্রশ্ন লিখুন"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>English Question</label>
+                    <textarea id="questionEn" placeholder="Write English question"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>বাংলা উত্তর</label>
+                    <textarea id="answerBn" placeholder="বাংলা উত্তর লিখুন"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>English Answer</label>
+                    <textarea id="answerEn" placeholder="Write English answer"></textarea>
+                </div>
+                <button class="primary-btn" onclick="saveQuestion()">Save Question</button>
+                <button class="secondary-btn" onclick="resetQuestionForm()">Clear</button>
+                <hr style="margin:20px 0;border-color:var(--border);">
+                <h3>Question List</h3>
+                <div id="adminQuestionList"></div>
+            </div>
+            <div id="tab-bulk" class="admin-tab-content">
+                <h3>Bulk Add Questions</h3>
+                <div class="bulk-help">
+                    প্রতিটি লাইনে লিখুন:
+                    বাংলা প্রশ্ন | English Question | বাংলা উত্তর | English Answer
+                </div>
+                <div class="form-group">
+                    <label>Select Section</label>
+                    <select id="bulkSection"></select>
+                </div>
+                <div class="form-group">
+                    <label>Questions Data</label>
+                    <textarea id="bulkQuestions" rows="12"
+                        placeholder="বাংলা প্রশ্ন | English Question | বাংলা উত্তর | English Answer"></textarea>
+                </div>
+                <button class="primary-btn" onclick="bulkAddQuestions()">Add All Questions</button>
+                <div id="bulkMessage"></div>
+            </div>
+
+            <div id="tab-sections" class="admin-tab-content">
+                <h3>Section Management</h3>
+                <div class="form-group">
+                    <label>New Section Name</label>
+                    <input type="text" id="newSection" placeholder="Enter section name">
+                </div>
+                <button class="primary-btn" onclick="addSection()">Add Section</button>
+                <hr style="margin:20px 0;border-color:var(--border);">
+                <div id="sectionManagement"></div>
+            </div>
+
+            <div id="tab-github" class="admin-tab-content">
+                <h3>GitHub Database Update</h3>
+                <div class="github-help">
+                    GitHub Token দিয়ে question.json ফাইলটি সরাসরি
+                    GitHub Repository-তে আপডেট করতে পারবেন।
+                </div>
+                <div class="form-group">
+                    <label>GitHub Personal Access Token</label>
+                    <input type="password" id="githubToken"
+                        placeholder="ghp_xxxxxxxxxxxxxxxxx" autocomplete="off">
+                </div>
+                <button class="primary-btn" onclick="saveToken()">Save Token</button>
+                <button class="secondary-btn" onclick="clearToken()">Clear Token</button>
+                <hr style="margin:20px 0;border-color:var(--border);">
+                <button class="primary-btn" onclick="saveToGithub()">Update GitHub Database</button>
+                <div id="githubMessage"></div>
+            </div>
+
+            <div id="tab-password" class="admin-tab-content">
+                <h3>Change Admin Password</h3>
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" id="currentAdminPassword"
+                        placeholder="Current password">
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" id="newAdminPassword"
+                        placeholder="New password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirmAdminPassword"
+                        placeholder="Confirm new password">
+                </div>
+                <button class="primary-btn" onclick="changeAdminPassword()">Change Password</button>
+                <div id="passwordMessage"></div>
+            </div>
+
+            <hr style="margin:20px 0;border-color:var(--border);">
+            <button class="danger-btn" onclick="logoutAdmin()">Logout</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* =====================================
+   APP + QUESTION SYSTEM
+===================================== */
+
+window.appData = {};
+window.currentLanguage = "bn";
+window.currentSection = "all";
+window.adminLoggedIn = false;
+
+const ADMIN_PASSWORD_KEY = "gpn-admin-password";
+const DEFAULT_ADMIN_PASSWORD = "admin123";
+
+/* HTML নিরাপদে দেখানোর জন্য */
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, function(char) {
+        return {
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+        }[char];
+    });
+}
+
+/* প্রশ্নের ডেটা যাচাই */
+function validateQuestionData(data) {
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+        return false;
+    }
+
+    return Object.values(data).every(questions =>
+        Array.isArray(questions) &&
+        questions.every(q =>
+            Array.isArray(q) &&
+            q.length === 4 &&
+            q.every(value => typeof value === "string")
+        )
+    );
+}
+
+/* question.json লোড */
+async function loadQuestionData() {
+    const container = document.getElementById("questionList");
+
+    try {
+        const response = await fetch("./question.json?v=" + Date.now());
+
+        if (!response.ok) {
+            throw new Error("question.json ফাইল পাওয়া যায়নি।");
+        }
+
+        const data = await response.json();
+
+        if (!validateQuestionData(data)) {
+            throw new Error("question.json-এর ডেটা ফরম্যাট সঠিক নয়।");
+        }
+
+        window.appData = data;
+
+        renderSections();
+        renderQuestions();
+
+        document.dispatchEvent(new Event("questionDataLoaded"));
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML =
+            '<p class="empty-message">' + escapeHTML(error.message) +
+            '<br>ফাইলের নাম ও অবস্থান পরীক্ষা করুন।</p>';
+    }
+}
+
+/* ভাষা পরিবর্তন */
+function setLanguage(language) {
+    if (language !== "bn" && language !== "en") return;
+
+    window.currentLanguage = language;
+
+    document.getElementById("bnBtn").classList.toggle("active", language === "bn");
+    document.getElementById("enBtn").classList.toggle("active", language === "en");
+
+    renderSections();
+    renderQuestions();
+}
+
+/* Dark Mode */
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+
+    const dark = document.body.classList.contains("dark-mode");
+
+    localStorage.setItem("gpn-theme", dark ? "dark" : "light");
+    document.getElementById("themeBtn").textContent = dark ? "☀️" : "🌙";
+}
+
+function applySavedTheme() {
+    if (localStorage.getItem("gpn-theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("themeBtn").textContent = "☀️";
+    }
+}
+
+/* Hidden Sections */
+const HIDDEN_SECTIONS_KEY = "gpn-hidden-sections";
+
+function getHiddenSections() {
+    try {
+        const value = JSON.parse(localStorage.getItem(HIDDEN_SECTIONS_KEY) || "[]");
+        return Array.isArray(value) ? value : [];
+    } catch {
+        return [];
+    }
+}
+
+function getVisibleSections() {
+    const hidden = getHiddenSections();
+    return Object.keys(window.appData).filter(section => !hidden.includes(section));
+}
+
+/* সব প্রশ্ন সংগ্রহ */
+function getAllQuestions() {
+    const result = [];
+
+    Object.keys(window.appData).forEach(section => {
+        const questions = window.appData[section];
+
+        if (!Array.isArray(questions)) return;
+
+        questions.forEach((item, index) => {
+            if (!Array.isArray(item) || item.length !== 4) return;
+
+            result.push({
+                section,
+                index,
+                bnQuestion:item[0],
+                enQuestion:item[1],
+                bnAnswer:item[2],
+                enAnswer:item[3]
+            });
+        });
+    });
+
+    return result;
+}
+
+/* Section দেখানো */
+function renderSections() {
+    const container = document.getElementById("sections");
+    if (!container) return;
+
+    let html = `
+        <button class="section-button ${window.currentSection === "all" ? "active" : ""}"
+            onclick="selectSection('all')">
+            ${window.currentLanguage === "bn" ? "সব প্রশ্ন" : "All Questions"}
+        </button>
+    `;
+
+    getVisibleSections().forEach(section => {
+        const encoded = encodeURIComponent(section);
+        const active = window.currentSection === section ? "active" : "";
+
+        html += `
+            <button class="section-button ${active}"
+                onclick="selectSection(decodeURIComponent('${encoded}'))">
+                ${escapeHTML(section)}
+            </button>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+function selectSection(section) {
+    window.currentSection = section;
+    renderSections();
+    renderQuestions();
+}
+
+/* প্রশ্ন দেখানো */
+function renderQuestions() {
+    const container = document.getElementById("questionList");
+    const heading = document.getElementById("sectionHeading");
+    const count = document.getElementById("questionCount");
+
+    if (!container) return;
+
+    const searchValue = (document.getElementById("search")?.value || "")
+        .trim().toLowerCase();
+
+    let questions = getAllQuestions();
+
+    if (window.currentSection !== "all") {
+        questions = questions.filter(q => q.section === window.currentSection);
+    }
+
+    questions = questions.filter(q => {
+        const searchable = [
+            q.bnQuestion,q.enQuestion,q.bnAnswer,q.enAnswer,q.section
+        ].join(" ").toLowerCase();
+
+        return searchable.includes(searchValue);
+    });
+
+    if (heading) {
+        heading.textContent = window.currentSection === "all"
+            ? (window.currentLanguage === "bn" ? "সব প্রশ্ন" : "All Questions")
+            : window.currentSection;
+    }
+
+    if (count) {
+        count.textContent = questions.length +
+            (window.currentLanguage === "bn" ? " টি প্রশ্ন" : " Questions");
+    }
+
+    if (!questions.length) {
+        container.innerHTML = `
+            <p class="empty-message">
+                ${window.currentLanguage === "bn"
+                    ? "কোনো প্রশ্ন পাওয়া যায়নি।"
+                    : "No questions found."}
+            </p>`;
+        return;
+    }
+
+    let html = "";
+
+    questions.forEach((q, index) => {
+        const language = window.currentLanguage;
+        const questionText = language === "bn" ? q.bnQuestion : q.enQuestion;
+        const answerText = language === "bn" ? q.bnAnswer : q.enAnswer;
+        const sectionCode = encodeURIComponent(q.section);
+
+        html += `
+            <article class="question-card">
+                <div class="question-card-top">
+                    <span class="question-number">${index + 1}</span>
+                    <span class="question-section-name">${escapeHTML(q.section)}</span>
+                </div>
+
+                <div class="question-text">${escapeHTML(questionText)}</div>
+
+                <div class="question-actions">
+                    <button class="language-toggle-btn ${language === "bn" ? "active" : ""}"
+                        onclick="setCardLanguage('${sectionCode}',${q.index},'bn',this)">
+                        BN
+                    </button>
+
+                    <button class="language-toggle-btn ${language === "en" ? "active" : ""}"
+                        onclick="setCardLanguage('${sectionCode}',${q.index},'en',this)">
+                        EN
+                    </button>
+
+                    <button class="answer-toggle-btn"
+                        onclick="toggleAnswer(this)">
+                        ${language === "bn" ? "উত্তর দেখুন" : "Show Answer"}
+                    </button>
+                </div>
+
+                <div class="answer-box" hidden>
+                    <div class="answer-heading">
+                        ${language === "bn" ? "উত্তর:" : "Answer:"}
+                    </div>
+                    <div class="answer-text">${escapeHTML(answerText)}</div>
+                </div>
+            </article>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+/* প্রতিটি কার্ডে BN / EN পরিবর্তন */
+function setCardLanguage(sectionCode, index, language, button) {
+    const section = decodeURIComponent(sectionCode);
+    const q = window.appData[section]?.[index];
+
+    if (!q) return;
+
+    const card = button.closest(".question-card");
+    if (!card) return;
+
+    const question = card.querySelector(".question-text");
+    const answerHeading = card.querySelector(".answer-heading");
+    const answerText = card.querySelector(".answer-text");
+    const answerButton = card.querySelector(".answer-toggle-btn");
+
+    /* প্রশ্ন ও উত্তর একই সঙ্গে পরিবর্তন */
+    question.textContent = language === "bn" ? q[0] : q[1];
+    answerText.textContent = language === "bn" ? q[2] : q[3];
+    answerHeading.textContent = language === "bn" ? "উত্তর:" : "Answer:";
+
+    /* সক্রিয় ভাষার বাটন */
+    card.querySelectorAll(".language-toggle-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+    button.classList.add("active");
+
+    /* উত্তর বাটনের ভাষা */
+    const answerBox = card.querySelector(".answer-box");
+    answerButton.textContent = answerBox.hidden
+        ? (language === "bn" ? "উত্তর দেখুন" : "Show Answer")
+        : (language === "bn" ? "উত্তর লুকান" : "Hide Answer");
+}
+
+/* উত্তর দেখানো / লুকানো */
+function toggleAnswer(button) {
+    const card = button.closest(".question-card");
+    const answerBox = card?.querySelector(".answer-box");
+
+    if (!answerBox) return;
+
+    answerBox.hidden = !answerBox.hidden;
+
+    const activeLanguage = card.querySelector(".language-toggle-btn.active");
+    const language = activeLanguage?.textContent.trim() || "BN";
+
+    if (answerBox.hidden) {
+        button.textContent = language === "BN" ? "উত্তর দেখুন" : "Show Answer";
+    } else {
+        button.textContent = language === "BN" ? "উত্তর লুকান" : "Hide Answer";
+    }
+}
+
+/* Search */
+document.getElementById("search").addEventListener("input", renderQuestions);
+
+/* App চালু */
+document.addEventListener("DOMContentLoaded", function() {
+    applySavedTheme();
+    setLanguage("bn");
+    loadQuestionData();
+
+    const tokenInput = document.getElementById("githubToken");
+    if (tokenInput && getSavedGithubToken()) {
+        tokenInput.placeholder = "Token সংরক্ষিত আছে";
+    }
+});
+
+/* =====================================
+   ADMIN SYSTEM
+===================================== */
+
+function getAdminPassword() {
+    return localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_ADMIN_PASSWORD;
+}
+
+function openAdmin() {
+    document.getElementById("adminModal").classList.add("show");
+
+    if (window.adminLoggedIn) {
+        showAdminDashboard();
+    } else {
+        document.getElementById("adminLogin").style.display = "block";
+        document.getElementById("adminDashboard").style.display = "none";
+    }
+}
+
+function closeAdmin() {
+    document.getElementById("adminModal").classList.remove("show");
+}
+
+/* Admin Login */
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const password = document.getElementById("adminPassword").value;
+    const message = document.getElementById("loginMessage");
+
+    if (password === getAdminPassword()) {
+        window.adminLoggedIn = true;
+        document.getElementById("adminPassword").value = "";
+        message.innerHTML = "";
+        showAdminDashboard();
+    } else {
+        message.innerHTML =
+            '<div class="message error">ভুল পাসওয়ার্ড। আবার চেষ্টা করুন।</div>';
+    }
+});
+
+function showAdminDashboard() {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminDashboard").style.display = "block";
+
+    populateSectionSelects();
+    renderAdminQuestions();
+    renderSectionManagement();
+}
+
+/* Logout */
+function logoutAdmin() {
+    window.adminLoggedIn = false;
+
+    document.getElementById("adminDashboard").style.display = "none";
+    document.getElementById("adminLogin").style.display = "block";
+    document.getElementById("loginMessage").innerHTML =
+        '<div class="message success">Logout সফল হয়েছে।</div>';
+}
+
+/* Admin Tabs */
+function showAdminTab(tab, button) {
+    document.querySelectorAll(".admin-tab-content").forEach(el => {
+        el.classList.remove("active");
+    });
+
+    document.querySelectorAll(".admin-tabs button").forEach(el => {
+        el.classList.remove("active");
+    });
+
+    const target = document.getElementById("tab-" + tab);
+    if (target) target.classList.add("active");
+    if (button) button.classList.add("active");
+}
+
+/* Section Dropdown */
+function populateSectionSelects() {
+    const sections = Object.keys(window.appData);
+
+    ["questionSection", "bulkSection"].forEach(id => {
+        const select = document.getElementById(id);
+        if (!select) return;
+
+        const oldValue = select.value;
+
+        select.innerHTML = sections.map(section => `
+            <option value="${escapeHTML(section)}">${escapeHTML(section)}</option>
+        `).join("");
+
+        if (sections.includes(oldValue)) select.value = oldValue;
+    });
+}
+
+/* প্রশ্ন যোগ / আপডেট */
+function saveQuestion() {
+    if (!window.adminLoggedIn) return;
+
+    const section = document.getElementById("questionSection").value;
+    const bn = document.getElementById("questionBn").value.trim();
+    const en = document.getElementById("questionEn").value.trim();
+    const bnAnswer = document.getElementById("answerBn").value.trim();
+    const enAnswer = document.getElementById("answerEn").value.trim();
+    const editId = document.getElementById("editQuestionId").value;
+
+    if (!section || !bn || !en || !bnAnswer || !enAnswer) {
+        alert("সবগুলো ঘর পূরণ করুন।");
+        return;
+    }
+
+    const newQuestion = [bn,en,bnAnswer,enAnswer];
+
+    if (editId) {
+        const separator = editId.lastIndexOf("__");
+        const oldSection = editId.substring(0, separator);
+        const oldIndex = Number(editId.substring(separator + 2));
+
+        if (!window.appData[oldSection]?.[oldIndex]) {
+            alert("প্রশ্নটি পাওয়া যায়নি।");
+            return;
+        }
+
+        if (oldSection === section) {
+            window.appData[section][oldIndex] = newQuestion;
+        } else {
+            window.appData[oldSection].splice(oldIndex, 1);
+            window.appData[section].push(newQuestion);
+        }
+
+        alert("প্রশ্ন আপডেট হয়েছে।");
+    } else {
+        window.appData[section].push(newQuestion);
+        alert("নতুন প্রশ্ন যোগ হয়েছে।");
+    }
+
+    resetQuestionForm();
+    populateSectionSelects();
+    renderQuestions();
+    renderAdminQuestions();
+}
+
+/* ফর্ম পরিষ্কার */
+function resetQuestionForm() {
+    document.getElementById("editQuestionId").value = "";
+    document.getElementById("questionBn").value = "";
+    document.getElementById("questionEn").value = "";
+    document.getElementById("answerBn").value = "";
+    document.getElementById("answerEn").value = "";
+    document.getElementById("questionFormHeading").textContent = "Add New Question";
+}
+
+/* Admin Question List */
+function renderAdminQuestions() {
+    const container = document.getElementById("adminQuestionList");
+    if (!container) return;
+
+    let html = "";
+
+    Object.keys(window.appData).forEach(section => {
+        window.appData[section].forEach((q,index) => {
+            const sectionCode = encodeURIComponent(section);
+
+            html += `
+                <div class="admin-list-item">
+                    <div>
+                        <strong>${escapeHTML(section)}</strong>
+                        <div>${escapeHTML(q[0])}</div>
+                    </div>
+                    <div class="admin-list-actions">
+                        <button class="primary-btn"
+                            onclick="editQuestion('${sectionCode}',${index})">Edit</button>
+                        <button class="danger-btn"
+                            onclick="deleteQuestion('${sectionCode}',${index})">Delete</button>
+                    </div>
+                </div>
+            `;
+        });
+    });
+
+    container.innerHTML = html || "<p>কোনো প্রশ্ন নেই।</p>";
+}
+
+/* প্রশ্ন Edit */
+function editQuestion(sectionCode,index) {
+    const section = decodeURIComponent(sectionCode);
+    const q = window.appData[section]?.[index];
+    if (!q) return;
+
+    document.getElementById("editQuestionId").value = section + "__" + index;
+    document.getElementById("questionSection").value = section;
+    document.getElementById("questionBn").value = q[0];
+    document.getElementById("questionEn").value = q[1];
+    document.getElementById("answerBn").value = q[2];
+    document.getElementById("answerEn").value = q[3];
+    document.getElementById("questionFormHeading").textContent = "Edit Question";
+
+    showAdminTab("manage",document.querySelector(".admin-tabs button"));
+    document.querySelector(".modal-content").scrollTop = 0;
+}
+
+/* প্রশ্ন Delete */
+function deleteQuestion(sectionCode,index) {
+    const section = decodeURIComponent(sectionCode);
+
+    if (!confirm("এই প্রশ্নটি মুছে ফেলতে চান?")) return;
+
+    window.appData[section].splice(index,1);
+
+    resetQuestionForm();
+    renderQuestions();
+    renderAdminQuestions();
+}
+
+/* একসঙ্গে অনেক প্রশ্ন যোগ */
+function bulkAddQuestions() {
+    if (!window.adminLoggedIn) return;
+
+    const section = document.getElementById("bulkSection").value;
+    const input = document.getElementById("bulkQuestions").value.trim();
+    const message = document.getElementById("bulkMessage");
+
+    if (!section || !input) {
+        message.innerHTML =
+            '<div class="message error">Section এবং প্রশ্নের তথ্য দিন।</div>';
+        return;
+    }
+
+    const lines = input.split(/\r?\n/);
+    let added = 0;
+    let skipped = 0;
+
+    lines.forEach(line => {
+        if (!line.trim()) return;
+
+        const parts = line.split("|").map(x => x.trim());
+
+        if (parts.length !== 4 || parts.some(x => !x)) {
+            skipped++;
+            return;
+        }
+
+        window.appData[section].push(parts);
+        added++;
+    });
+
+    renderQuestions();
+    renderAdminQuestions();
+
+    message.innerHTML = `
+        <div class="message success">
+            ${added} টি প্রশ্ন যোগ হয়েছে। ${skipped} টি লাইন বাদ পড়েছে।
+        </div>
+    `;
+
+    document.getElementById("bulkQuestions").value = "";
+}
+/* =====================================
+   SECTION MANAGEMENT
+===================================== */
+
+function addSection() {
+    const input = document.getElementById("newSection");
+    const name = input.value.trim();
+
+    if (!name) {
+        alert("Section name লিখুন।");
+        return;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(window.appData,name)) {
+        alert("এই Section আগে থেকেই আছে।");
+        return;
+    }
+
+    window.appData[name] = [];
+    input.value = "";
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+}
+
+function renameSection(oldNameCode) {
+    const oldName = decodeURIComponent(oldNameCode);
+    const newName = prompt("নতুন Section Name লিখুন:",oldName);
+
+    if (!newName || !newName.trim()) return;
+
+    const name = newName.trim();
+
+    if (name !== oldName &&
+        Object.prototype.hasOwnProperty.call(window.appData,name)) {
+        alert("এই নামটি আগে থেকেই আছে।");
+        return;
+    }
+
+    const newData = {};
+
+    Object.keys(window.appData).forEach(key => {
+        newData[key === oldName ? name : key] = window.appData[key];
+    });
+
+    window.appData = newData;
+
+    if (window.currentSection === oldName) {
+        window.currentSection = name;
+    }
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+    renderAdminQuestions();
+}
+
+function deleteSection(sectionCode) {
+    const section = decodeURIComponent(sectionCode);
+
+    if (!confirm(section + " Section এবং এর সব প্রশ্ন মুছে ফেলবেন?")) {
+        return;
+    }
+
+    delete window.appData[section];
+
+    if (window.currentSection === section) {
+        window.currentSection = "all";
+    }
+
+    let hidden = getHiddenSections().filter(x => x !== section);
+    localStorage.setItem(HIDDEN_SECTIONS_KEY,JSON.stringify(hidden));
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+    renderAdminQuestions();
+}
+
+function toggleSectionVisibility(sectionCode) {
+    const section = decodeURIComponent(sectionCode);
+    let hidden = getHiddenSections();
+
+    if (hidden.includes(section)) {
+        hidden = hidden.filter(x => x !== section);
+    } else {
+        hidden.push(section);
+    }
+
+    localStorage.setItem(HIDDEN_SECTIONS_KEY,JSON.stringify(hidden));
+
+    if (hidden.includes(window.currentSection)) {
+        window.currentSection = "all";
+    }
+
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+}
+
+function moveSection(sectionCode,direction) {
+    const section = decodeURIComponent(sectionCode);
+    const keys = Object.keys(window.appData);
+    const index = keys.indexOf(section);
+    const newIndex = index + direction;
+
+    if (index < 0 || newIndex < 0 || newIndex >= keys.length) return;
+
+    [keys[index],keys[newIndex]] = [keys[newIndex],keys[index]];
+
+    const reordered = {};
+
+    keys.forEach(key => {
+        reordered[key] = window.appData[key];
+    });
+
+    window.appData = reordered;
+
+    populateSectionSelects();
+    renderSectionManagement();
+    renderSections();
+    renderQuestions();
+}
+
+function renderSectionManagement() {
+    const container = document.getElementById("sectionManagement");
+    if (!container) return;
+
+    const hidden = getHiddenSections();
+
+    container.innerHTML = Object.keys(window.appData).map((section,index) => {
+        const code = encodeURIComponent(section);
+
+        return `
+            <div class="admin-list-item ${hidden.includes(section) ? "hidden-section" : ""}">
+                <strong>${escapeHTML(section)}</strong>
+
+                <div class="admin-list-actions">
+                    <button class="secondary-btn"
+                        onclick="moveSection('${code}',-1)">↑</button>
+
+                    <button class="secondary-btn"
+                        onclick="moveSection('${code}',1)">↓</button>
+
+                    <button class="secondary-btn"
+                        onclick="toggleSectionVisibility('${code}')">
+                        ${hidden.includes(section) ? "Show" : "Hide"}
+                    </button>
+
+                    <button class="primary-btn"
+                        onclick="renameSection('${code}')">Rename</button>
+
+                    <button class="danger-btn"
+                        onclick="deleteSection('${code}')">Delete</button>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+/* =====================================
+   CHANGE ADMIN PASSWORD
+===================================== */
+
+function changeAdminPassword() {
+    if (!window.adminLoggedIn) return;
+
+    const current = document.getElementById("currentAdminPassword").value;
+    const newPassword = document.getElementById("newAdminPassword").value;
+    const confirmPassword = document.getElementById("confirmAdminPassword").value;
+    const message = document.getElementById("passwordMessage");
+
+    function showPasswordMessage(text,type) {
+        message.innerHTML = `
+            <div class="message ${type}">${escapeHTML(text)}</div>
+        `;
+    }
+
+    if (!current || !newPassword || !confirmPassword) {
+        showPasswordMessage("সবগুলো ঘর পূরণ করুন।","error");
+        return;
+    }
+
+    if (current !== getAdminPassword()) {
+        showPasswordMessage("Current Password সঠিক নয়।","error");
+        return;
+    }
+
+    if (newPassword.length < 6) {
+        showPasswordMessage("নতুন Password কমপক্ষে ৬ অক্ষরের হতে হবে।","error");
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        showPasswordMessage("New Password এবং Confirm Password মিলছে না।","error");
+        return;
+    }
+
+    if (current === newPassword) {
+        showPasswordMessage("নতুন Password আগের Password থেকে আলাদা দিন।","error");
+        return;
+    }
+
+    localStorage.setItem(ADMIN_PASSWORD_KEY,newPassword);
+
+    document.getElementById("currentAdminPassword").value = "";
+    document.getElementById("newAdminPassword").value = "";
+    document.getElementById("confirmAdminPassword").value = "";
+
+    showPasswordMessage("Password সফলভাবে পরিবর্তন হয়েছে। এখন নতুন Password দিয়ে Login করতে পারবেন।","success");
+}
+
+/* =====================================
+   GITHUB DATABASE SYSTEM
+===================================== */
+
+const GITHUB_OWNER = "Shohid98";
+const GITHUB_REPO = "Garments";
+const GITHUB_BRANCH = "main";
+const GITHUB_FILE_PATH = "question.json";
+
+const GITHUB_API_URL =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
+
+const GITHUB_TOKEN_KEY = "gpn-github-token";
+
+function getGithubHeaders(token) {
+    return {
+        "Accept":"application/vnd.github+json",
+        "Authorization":"Bearer " + token,
+        "X-GitHub-Api-Version":"2022-11-28"
+    };
+}
+
+function getSavedGithubToken() {
+    return localStorage.getItem(GITHUB_TOKEN_KEY) || "";
+}
+
+function encodeBase64Unicode(text) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = "";
+
+    bytes.forEach(byte => {
+        binary += String.fromCharCode(byte);
+    });
+
+    return btoa(binary);
+}
+
+function showGithubMessage(message,type) {
+    const container = document.getElementById("githubMessage");
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="message ${type}">${escapeHTML(message)}</div>
+    `;
+}
+
+/* Token যাচাই ও সংরক্ষণ */
+async function saveToken() {
+    const token = document.getElementById("githubToken").value.trim();
+
+    if (!token) {
+        showGithubMessage("GitHub Token দিন।","error");
+        return;
+    }
+
+    try {
+        showGithubMessage("Token যাচাই হচ্ছে...","success");
+
+        const response = await fetch(
+            GITHUB_API_URL + "?ref=" + encodeURIComponent(GITHUB_BRANCH),
+            {headers:getGithubHeaders(token)}
+        );
+
+        if (!response.ok) {
+            throw new Error("Token যাচাই করা যায়নি। Repository permission পরীক্ষা করুন।");
+        }
+
+        localStorage.setItem(GITHUB_TOKEN_KEY,token);
+
+        showGithubMessage("GitHub Token সফলভাবে যাচাই ও সংরক্ষণ করা হয়েছে।","success");
+
+    } catch(error) {
+        showGithubMessage(error.message,"error");
+    }
+}
+
+/* Token মুছে ফেলা */
+function clearToken() {
+    localStorage.removeItem(GITHUB_TOKEN_KEY);
+    document.getElementById("githubToken").value = "";
+
+    showGithubMessage("সংরক্ষিত Token মুছে ফেলা হয়েছে।","success");
+}
+
+/* GitHub-এ question.json আপডেট */
+async function saveToGithub() {
+    if (!window.adminLoggedIn) {
+        showGithubMessage("আগে Admin Login করুন।","error");
+        return;
+    }
+
+    const token = getSavedGithubToken();
+
+    if (!token) {
+        showGithubMessage("আগে GitHub Token Save করুন।","error");
+        return;
+    }
+
+    if (!validateQuestionData(window.appData)) {
+        showGithubMessage("প্রশ্নের ডেটা সঠিক নয়। GitHub-এ পাঠানো হয়নি।","error");
+        return;
+    }
+
+    if (!confirm("বর্তমান প্রশ্নের ডেটা GitHub-এর question.json-এ আপডেট করবেন?")) {
+        return;
+    }
+
+    try {
+        showGithubMessage("GitHub-এর সঙ্গে সংযোগ হচ্ছে...","success");
+
+        const getResponse = await fetch(
+            GITHUB_API_URL + "?ref=" + encodeURIComponent(GITHUB_BRANCH),
+            {headers:getGithubHeaders(token)}
+        );
+
+        if (!getResponse.ok) {
+            throw new Error("GitHub ফাইল পড়া যায়নি। Token ও Repository পরীক্ষা করুন।");
+        }
+
+        const fileData = await getResponse.json();
+
+        const jsonText = JSON.stringify(window.appData,null,2);
+        const encodedContent = encodeBase64Unicode(jsonText);
+
+        const updateResponse = await fetch(GITHUB_API_URL,{
+            method:"PUT",
+            headers:{
+                ...getGithubHeaders(token),
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                message:"Update Garments Pro Notebook question database",
+                content:encodedContent,
+                sha:fileData.sha,
+                branch:GITHUB_BRANCH
+            })
+        });
+
+        const result = await updateResponse.json();
+
+        if (!updateResponse.ok) {
+            throw new Error(result.message || "GitHub Update ব্যর্থ হয়েছে।");
+        }
+
+        showGithubMessage(
+            "সফলভাবে GitHub-এর question.json আপডেট হয়েছে।",
+            "success"
+        );
+
+    } catch(error) {
+        showGithubMessage(error.message,"error");
+    }
+}
+
+/* Modal-এর বাইরে ক্লিক করলে বন্ধ */
+document.getElementById("adminModal").addEventListener("click",function(event) {
+    if (event.target === this) {
+        closeAdmin();
+    }
+});
+</script>
+
+</body>
+</html>
